@@ -15,4 +15,4 @@ buildNumber.properties
 *.iws
 
 .idea/ 
-src/main/resources/Documents/
+src/main/resources/IEEEtranTest/
