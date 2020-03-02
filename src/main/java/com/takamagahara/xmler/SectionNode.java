@@ -1,10 +1,7 @@
-package com.takamagahara.reflector;
+package com.takamagahara.xmler;
 
 import org.dom4j.Attribute;
 import org.dom4j.Element;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,6 +34,10 @@ public class SectionNode {
         } else {
             return id.getValue() + " " + name.getValue();
         }
+    }
+
+    public String toFullString() {
+        return path;
     }
 
     public Element getElement() {

@@ -1,4 +1,4 @@
-package com.takamagahara.xml;
+package com.takamagahara.xmler;
 
 import java.io.FileOutputStream;
 
@@ -72,12 +72,5 @@ public class CreateXMLTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Test
-    public void CreateFromClass() {
-        String name = "test";
-        XMLer xmLer = new XMLer(name);
-        xmLer.InitializeXML();
     }
 }
