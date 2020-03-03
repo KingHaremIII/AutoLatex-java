@@ -33,4 +33,8 @@ public class Operator {
             }
         }
     }
+
+    public void pathRecorder(SectionNode sectionNode, List<String> recorder) {
+        recorder.add(sectionNode.getPath());
+    }
 }

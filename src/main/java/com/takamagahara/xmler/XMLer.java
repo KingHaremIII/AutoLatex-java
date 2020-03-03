@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.dom4j.Document;
@@ -13,6 +14,8 @@ import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 /**
  * Created with IntelliJ IDEA.
  * Description: xml processor conducting reading and writing using dom4j.
@@ -163,60 +166,90 @@ public class XMLer {
         return returnBoolean;
     }
 
-    public static boolean similar(Element root, Element rootLast, boolean found) {
-        // TODO
-        List<Element> elements = root.elements("section");
-        List<Element> elementsLast = rootLast.elements("section");
-
-        if (elements.size() != elementsLast.size()) {
-            System.out.println(root.attributeValue("name")+": length not match");
-            return false;
+    public static Element searcher(Element root, String[] paths) {
+        String[] path;
+        if (paths[0].equals("Documents")) {
+            path = new String[paths.length-1];
+            for (int i=1;i<paths.length;i++) {
+                path[i-1] = paths[i];
+            }
         } else {
-            int count = 0;
-            for (Element e : elements) {
-                String name = e.attributeValue("name");
-                // count unmatched name.
-                for (Element eLast : elementsLast) {
-//                    System.out.println(name+" ==== "+eLast.attributeValue("name"));
-                    if (eLast.attributeValue("name").equals(name)) {
-                        count++;
-                    }
-                }
-            }
-            // 1) all matched
-            if (count == elements.size()) {
-                for (Element e : elements) {
-                    String name = e.attributeValue("name");
-                    for (Element eLast : elementsLast) {
-                        if (eLast.attributeValue("name").equals(name)) {
-                            return similar(e, eLast, false);
-                        }
-                    }
-                }
-            } else {
-                // 2) only one unmatched.
-                if (count == elements.size() - 1) {
-                    for (Element e : elements) {
-                        String name = e.attributeValue("name");
-                        if (found) {
-                            System.out.println(e.attributeValue("name") + ": cascaded multi changed");
-                            return false;
-                        } else {
-                            for (Element eLast : elementsLast) {
-                                if (!eLast.attributeValue("name").equals(name)) {
-                                    return similar(e, eLast, true);
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    // 3) multiple names unmatched.
-                    System.out.println(root.attributeValue("name")+": multi changed===="+count);
-                    return false;
-                }
-            }
-            return true;
+            path = paths;
         }
+
+        Element target = null;
+        if (path.length > 1) {
+            String[] subPath = new String[path.length - 1];
+            for (int i = 1; i < path.length; i++) {
+                subPath[i - 1] = path[i];
+            }
+            String currentPoint = path[0];
+
+            // recursive searching for the target element.
+            List<Element> elements = root.elements("section");
+            for (Element e : elements) {
+                if (getNamefromElement(e).equals(currentPoint)) {
+                    target = searcher(e, subPath);
+                }
+            }
+        } else {
+            if (path.length == 1) {
+                String currentPoint = path[0];
+                List<Element> elements = root.elements("section");
+                for (Element e : elements) {
+                    if (getNamefromElement(e).equals(currentPoint)) {
+                        /*
+                        found the target.
+                         */
+                        target = e;
+                    }
+                }
+            }
+        }
+        return target;
+    }
+
+    /**
+     * judge the current structure configuration is similar with the previous one ot not.
+     * @param currentConfig absolute path of current configuration file.
+     * @param originConfig absolute path of previous configuration file.
+     * @return a collection of the result of judgement, whether absolute the same and both lists of current paths and origin paths.
+     * @throws NoSuchMethodException
+     * @throws DocumentException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
+    public static isSimilarCollection similar(String currentConfig, String originConfig) throws NoSuchMethodException, DocumentException, IllegalAccessException, InvocationTargetException {
+        List<String> currentPathes = new ArrayList<>();
+        List<String> originPathes = new ArrayList<>();
+        XMLer.reader(currentConfig, "section", (new Operator()),
+                Operator.class.getMethod("pathRecorder", SectionNode.class, List.class),
+                currentPathes);
+        XMLer.reader(originConfig, "section", (new Operator()),
+                Operator.class.getMethod("pathRecorder", SectionNode.class, List.class),
+                originPathes);
+
+        int count = 0;
+        for (String sc : currentPathes) {
+            for (String so: originPathes) {
+                if (sc.equals(so)) {
+                    count++;
+                }
+            }
+        }
+        isSimilarCollection returnCollection = new isSimilarCollection();
+        returnCollection.setCurrent(currentPathes);
+        returnCollection.setOrigin(originPathes);
+
+        if (count < currentPathes.size()-1) {
+            returnCollection.setResult(false);
+        } else {
+            returnCollection.setResult(true);
+            if (count == currentPathes.size()) {
+                returnCollection.setAbsoluteSame(true);
+            }
+        }
+        return returnCollection;
     }
 
     private static void Foreach(SectionNode sectionNode) {

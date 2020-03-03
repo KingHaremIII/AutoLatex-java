@@ -2,6 +2,7 @@ package com.takamagahara.reflector;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -10,24 +11,26 @@ import java.util.List;
 
 import com.takamagahara.xmler.SectionNode;
 import com.takamagahara.xmler.XMLer;
+import com.takamagahara.xmler.isSimilarCollection;
 import org.dom4j.*;
 import org.dom4j.io.SAXReader;
 
 /**
  * Created with IntelliJ IDEA.
- * Description:
+ * Description: make the structure corresponding to the configuration file.
  * User: kamisama
  * Date: 2020-03-01
  * Time: 下午2:21
  */
 public class Reflector {
     private String configFile;
-    private List<String> pathes;
+    private String pProject;
+    private List<String> paths;
 
     public Reflector(String configFile) {
         this.configFile = configFile;
         System.out.println("Reflector source: "+this.configFile);
-        pathes = new ArrayList<>();
+        paths = new ArrayList<>();
     }
 
     /**
@@ -35,17 +38,17 @@ public class Reflector {
      * @param projectPath absolute path of the project
      * @throws DocumentException
      */
-    public void Construct(String projectPath) throws DocumentException {
+    public void Reflect(String projectPath) throws DocumentException {
         SAXReader reader = new SAXReader();
         Document document = reader.read(new File(configFile));
         Element root = document.getRootElement();
-        File file = new File(projectPath+"/StructureBackup.xml");
+
         SectionNode sectionNode = new SectionNode(root, projectPath);
         Recursive(sectionNode);
-        for (String s : pathes) System.out.println(s);
+        for (String s : paths) System.out.println(s);
         Flash(projectPath + "/Documents");
         // backup configuration, then reflector can check whether it needs to reconstruct or just rename next time.
-        XMLer.writer(document, projectPath+"/StructureBackup.xml");
+        XMLer.writer(document, projectPath+"/.StructureBackup.xml");
     }
 
     /**
@@ -53,36 +56,40 @@ public class Reflector {
      * @param projectPath absolute path of the project
      * @throws DocumentException
      */
-    public void ConstructFast(String projectPath) throws DocumentException {
+    public void ReflectFast(String projectPath) throws DocumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        pProject = projectPath;
         SAXReader reader = new SAXReader();
         Document document = reader.read(new File(configFile));
         Element root = document.getRootElement();
-        File file = new File(projectPath+"/StructureBackup.xml");
+        File file = new File(projectPath+"/.StructureBackup.xml");
         if (file.exists()) {
             Element rootLast = (new SAXReader()).read(file).getRootElement();
-            if (!XMLer.similar(root, rootLast, false)) {
+            isSimilarCollection result = XMLer.similar(configFile, projectPath+"/.StructureBackup.xml");
+            if (!result.isResult()) {
                 SectionNode sectionNode = new SectionNode(root, projectPath);
                 Recursive(sectionNode);
-                for (String s : pathes) System.out.println(s);
+                for (String s : paths) System.out.println(s);
                 Flash(projectPath + "/Documents");
             } else {
-                Rename(root);
+                if (!result.isAbsoluteSame()) {
+                    Rename(rootLast, result.getCurrent(), result.getOrigin());
+                }
             }
         } else {
             SectionNode sectionNode = new SectionNode(root, projectPath);
             Recursive(sectionNode);
-            for (String s : pathes) System.out.println(s);
+            for (String s : paths) System.out.println(s);
             Flash(projectPath + "/Documents");
         }
         // backup configuration, then reflector can check whether it needs to reconstruct or just rename next time.
-        XMLer.writer(document, projectPath+"/StructureBackup.xml");
+        XMLer.writer(document, projectPath+"/.StructureBackup.xml");
     }
 
     /*
     create directories and files with a recursive way
      */
     private void Recursive(SectionNode sectionNode) {
-        pathes.add(sectionNode.getFullPath());
+        paths.add(sectionNode.getFullPath());
         CreateDirectory(sectionNode.getFullPath(), sectionNode.getName());
 
         Element eRoot = sectionNode.getElement();
@@ -108,7 +115,7 @@ public class Reflector {
                         file2.delete();
                         continue;
                     }
-                    if (jugeIn(file2.getAbsolutePath())) {
+                    if (judgeIn(file2.getAbsolutePath())) {
                         if (file2.isDirectory()) {
                             Flash(file2.getAbsolutePath());
                         }
@@ -129,17 +136,61 @@ public class Reflector {
         }
     }
 
-    private void Rename(Element root) {
-        // TODO rename function
-        System.out.println("rename");
+    /*
+    rename the only one different file.
+     */
+    private void Rename(Element root, List<String> current, List<String> origin) {
+        System.out.println("similar structure, just rename. ");
+        List<String> backup = new ArrayList<>();
+        List<String> backupOrigin = new ArrayList<>();
+        for (String s : current) {
+            backup.add(s);
+        }
+        for (String s : origin) {
+            backupOrigin.add(s);
+        }
+        // find the only one changed file.
+        for (String s : current) {
+            for (String so : origin) {
+                if (s.equals(so)) {
+                    backup.remove(s);
+                    backupOrigin.remove(so);
+                }
+            }
+        }
+
+        // rename the target file.
+        if (backup.size() == 1) {
+            String pathOrigin = backupOrigin.get(0);
+            String parentPath = Paths.get(pathOrigin).getParent().toString();
+            String[] pathOriginList = pathOrigin.split("/");
+            String nameOrigin = pathOriginList[pathOriginList.length-1];
+            Element target = XMLer.searcher(root, pathOriginList);
+            if (target != null) {
+                String[] newPathList = backup.get(0).split("/");
+                String newIDName = newPathList[newPathList.length - 1];
+                File targetFile = new File(pProject+"/"+pathOrigin);
+                if (targetFile.exists()) {
+                    // rename directory and its tex file.
+                     targetFile.renameTo(new File(pProject+"/"+parentPath+"/"+newIDName));
+                    (new File(pProject+"/"+parentPath+"/"+newIDName+"/"+nameOrigin+".tex")).renameTo(new File(pProject+"/"+parentPath+"/"+newIDName+"/"+newIDName+".tex"));
+                } else {
+                    System.out.println("Reflector.Rename: ========Not Found the File: "+targetFile);
+                }
+            } else {
+                System.out.println("Reflector.Rename: =======================Not Found the Target: "+backupOrigin.get(0));
+            }
+        } else {
+            System.out.println("Error in Reflector.Rename with length of left paths: "+backup.size());
+        }
     }
 
     /*
     juge whether the path is in the useful path list or not
      */
-    private boolean jugeIn(String path) {
+    private boolean judgeIn(String path) {
         boolean juge = false;
-        for (String s : pathes) {
+        for (String s : paths) {
             if (s.equals(path)) {
                 juge = true;
             }
@@ -199,7 +250,7 @@ public class Reflector {
     create the directory and file
      */
     private void CreateDirectory(String path, String name) {
-        pathes.add(path+"/"+name+".tex");
+        paths.add(path+"/"+name+".tex");
         try {
             Files.createDirectory(Paths.get(path));
         } catch (IOException e) {
@@ -212,7 +263,7 @@ public class Reflector {
         }
     }
 
-    public List<String> getPathes() {
-        return pathes;
+    public List<String> getPaths() {
+        return paths;
     }
 }

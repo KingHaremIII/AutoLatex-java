@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,6 +27,17 @@ public class ReadXMLTest {
     public void Load() throws DocumentException {
         reader = new SAXReader();
         document = reader.read(new File("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/Structure.xml"));
+    }
+
+    @Test
+    public void attrrChangeTest() {
+        Element root = document.getRootElement();
+        List<Attribute> list = new ArrayList<>();
+        Attribute a = root.attribute("name");
+        a.setValue("fuck");
+        list.add(a);
+        root.setAttributes(list);
+        System.out.println(root.attributeValue("name"));
     }
 
     @Test
@@ -92,6 +104,14 @@ public class ReadXMLTest {
 
         SectionNode sectionNode = new SectionNode(root, root.getPath());
         XMLer.Foreach(sectionNode, "section");
+    }
+
+    @Test
+    public void searchTest() {
+        Element root = document.getRootElement();
+        String path = "III Proposed Method0/2) A";
+        Element target = XMLer.searcher(root, path.split("/"));
+        System.out.println(target.attributeValue("name"));
     }
 }
 

@@ -2,8 +2,6 @@ package com.takamagahara.reflector;
 
 import org.dom4j.DocumentException;
 
-import java.util.List;
-
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -16,6 +14,6 @@ public class ReflectorEntry {
         String path = args[0];
         String source = path+ "/Structure.xml";
         Reflector reflector = new Reflector(source);
-        reflector.Construct(path);
+        reflector.Reflect(path);
     }
 }

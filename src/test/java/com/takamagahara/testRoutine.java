@@ -39,4 +39,16 @@ public class testRoutine {
             System.out.println("not");
         }
     }
+
+    @Test
+    public void argsTest() {
+        String[] a = {"a", "b"};
+        System.out.println();
+    }
+
+    @Test
+    public void renameTest() {
+        File file = new File("/home/kamisama/tmp");
+        file.renameTo(new File("/home/kamisama/fuck"));
+    }
 }
