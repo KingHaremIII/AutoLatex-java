@@ -26,7 +26,7 @@ public class ConvergerTest {
     @Test
     public void unitConvergeTest() throws DocumentException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Converger converger = new Converger("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest");
-        converger.Converge("Documents/I Introduction/A as");
+        converger.Converge("Documents/I Introduction/B dfd");
     }
 
     @Test

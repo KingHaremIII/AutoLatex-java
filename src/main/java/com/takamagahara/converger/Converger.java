@@ -64,10 +64,16 @@ public class Converger {
         drop all content of other sections except the unitPath.
          */
         // add ignore attribute to every element firstly using reflection mechanism of java.
-        Element structureRoot = XMLer.reader(projectPath+"/Structure.xml",
-                (new Operator()), Operator.class.getMethod("addIgnore", SectionNode.class, String.class),
+        Element structureRoot = XMLer.reader(projectPath+"/Structure.xml", "section",
+                (new Operator()),
+                Operator.class.getMethod("addIgnore", SectionNode.class, String.class),
                 unitPath);
-        // TODO delete all elements in ignored sections including figure, table and algorithm.
+        // delete all elements in ignored sections including figure, table and algorithm.
+        SectionNode sn = new SectionNode(structureRoot, XMLer.getNamefromElement(structureRoot));
+        structureRoot = XMLer.reader(sn, "section",
+                (new Operator()),
+                Operator.class.getMethod("deleteExcept", SectionNode.class, String.class),
+                unitPath);
 
         bodyElement.add(structureRoot);
         String nameProject = Paths.get(projectPath).getFileName().toString();

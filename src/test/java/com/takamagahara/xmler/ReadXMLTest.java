@@ -25,7 +25,7 @@ public class ReadXMLTest {
     @Before
     public void Load() throws DocumentException {
         reader = new SAXReader();
-        document = reader.read(new File("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/test.xml"));
+        document = reader.read(new File("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/Structure.xml"));
     }
 
     @Test
@@ -78,7 +78,20 @@ public class ReadXMLTest {
 
     @Test
     public void ForeachTest() throws DocumentException {
-        XMLer.reader("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/Structure.xml");
+        XMLer.reader("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/Structure.xml", "section");
+    }
+
+    @Test
+    public void foreachTest() throws DocumentException {
+        SAXReader saxReader = new SAXReader();
+        Document document = saxReader.read(
+                new File("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/Structure.xml"));
+        Element root = document.getRootElement();
+        List<Element> elements = root.elements("section");
+        System.out.println(elements.size());
+
+        SectionNode sectionNode = new SectionNode(root, root.getPath());
+        XMLer.Foreach(sectionNode, "section");
     }
 }
 

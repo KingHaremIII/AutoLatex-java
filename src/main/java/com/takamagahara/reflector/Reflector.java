@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.takamagahara.xmler.SectionNode;
+import com.takamagahara.xmler.XMLer;
 import org.dom4j.*;
 import org.dom4j.io.SAXReader;
 
@@ -35,15 +36,46 @@ public class Reflector {
      * @throws DocumentException
      */
     public void Construct(String projectPath) throws DocumentException {
-//        System.out.println("It is better to ensure that you backup current Document by like git. ");
         SAXReader reader = new SAXReader();
         Document document = reader.read(new File(configFile));
-
         Element root = document.getRootElement();
+        File file = new File(projectPath+"/StructureBackup.xml");
         SectionNode sectionNode = new SectionNode(root, projectPath);
         Recursive(sectionNode);
         for (String s : pathes) System.out.println(s);
-        Flash(projectPath+"/Documents");
+        Flash(projectPath + "/Documents");
+        // backup configuration, then reflector can check whether it needs to reconstruct or just rename next time.
+        XMLer.writer(document, projectPath+"/StructureBackup.xml");
+    }
+
+    /**
+     * enable rename function with similar structure between the previous version and the current one.
+     * @param projectPath absolute path of the project
+     * @throws DocumentException
+     */
+    public void ConstructFast(String projectPath) throws DocumentException {
+        SAXReader reader = new SAXReader();
+        Document document = reader.read(new File(configFile));
+        Element root = document.getRootElement();
+        File file = new File(projectPath+"/StructureBackup.xml");
+        if (file.exists()) {
+            Element rootLast = (new SAXReader()).read(file).getRootElement();
+            if (!XMLer.similar(root, rootLast, false)) {
+                SectionNode sectionNode = new SectionNode(root, projectPath);
+                Recursive(sectionNode);
+                for (String s : pathes) System.out.println(s);
+                Flash(projectPath + "/Documents");
+            } else {
+                Rename(root);
+            }
+        } else {
+            SectionNode sectionNode = new SectionNode(root, projectPath);
+            Recursive(sectionNode);
+            for (String s : pathes) System.out.println(s);
+            Flash(projectPath + "/Documents");
+        }
+        // backup configuration, then reflector can check whether it needs to reconstruct or just rename next time.
+        XMLer.writer(document, projectPath+"/StructureBackup.xml");
     }
 
     /*
@@ -55,6 +87,7 @@ public class Reflector {
 
         Element eRoot = sectionNode.getElement();
         List sections = eRoot.elements("section");
+//        System.out.println(sectionNode.getElement().attributeValue("name")+"'s len"+" = "+sections.size());
         for (Iterator<?> it = sections.iterator(); it.hasNext();) {
             Element e = (Element) it.next();
             SectionNode sn = new SectionNode(e, sectionNode.getFullPath());
@@ -94,6 +127,11 @@ public class Reflector {
         } else {
             System.out.println("Flash: Wrong Path!");
         }
+    }
+
+    private void Rename(Element root) {
+        // TODO rename function
+        System.out.println("rename");
     }
 
     /*
