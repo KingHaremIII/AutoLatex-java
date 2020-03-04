@@ -110,7 +110,7 @@ public class ReadXMLTest {
     public void searchTest() {
         Element root = document.getRootElement();
         String path = "III Proposed Method0/2) A";
-        Element target = XMLer.searcher(root, path.split("/"));
+        Element target = XMLer.searchByName(root, path.split("/"));
         System.out.println(target.attributeValue("name"));
     }
 }

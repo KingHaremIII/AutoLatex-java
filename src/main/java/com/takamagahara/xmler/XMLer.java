@@ -9,12 +9,10 @@ import java.util.List;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 /**
  * Created with IntelliJ IDEA.
@@ -166,7 +164,13 @@ public class XMLer {
         return returnBoolean;
     }
 
-    public static Element searcher(Element root, String[] paths) {
+    /**
+     * search for the specific target by id+name attribute
+     * @param root start point
+     * @param paths String array of the split paths
+     * @return
+     */
+    public static Element searchByName(Element root, String[] paths) {
         String[] path;
         if (paths[0].equals("Documents")) {
             path = new String[paths.length-1];
@@ -189,7 +193,7 @@ public class XMLer {
             List<Element> elements = root.elements("section");
             for (Element e : elements) {
                 if (getNamefromElement(e).equals(currentPoint)) {
-                    target = searcher(e, subPath);
+                    target = searchByName(e, subPath);
                 }
             }
         } else {
@@ -198,6 +202,55 @@ public class XMLer {
                 List<Element> elements = root.elements("section");
                 for (Element e : elements) {
                     if (getNamefromElement(e).equals(currentPoint)) {
+                        /*
+                        found the target.
+                         */
+                        target = e;
+                    }
+                }
+            }
+        }
+        return target;
+    }
+
+    /**
+     * search for the specific target by label name.
+     * @param root
+     * @param paths
+     * @return
+     */
+    public static Element searcher(Element root, String[] paths) {
+        String[] path;
+        if (paths[0].equals("documents")) {
+            path = new String[paths.length-1];
+            for (int i=1;i<paths.length;i++) {
+                path[i-1] = paths[i];
+            }
+        } else {
+            path = paths;
+        }
+
+        Element target = null;
+        if (path.length > 1) {
+            String[] subPath = new String[path.length - 1];
+            for (int i = 1; i < path.length; i++) {
+                subPath[i - 1] = path[i];
+            }
+            String currentPoint = path[0];
+
+            // recursive searching for the target element.
+            List<Element> elements = root.elements();
+            for (Element e : elements) {
+                if (e.getName().equals(currentPoint)) {
+                    target = searcher(e, subPath);
+                }
+            }
+        } else {
+            if (path.length == 1) {
+                String currentPoint = path[0];
+                List<Element> elements = root.elements();
+                for (Element e : elements) {
+                    if (e.getName().equals(currentPoint)) {
                         /*
                         found the target.
                          */
@@ -254,7 +307,7 @@ public class XMLer {
 
     private static void Foreach(SectionNode sectionNode) {
         String name = sectionNode.getElement().attribute("name").getValue();
-//        System.out.println(sectionNode.toFullString());
+        System.out.println(sectionNode.toFullString());
         List<Element> elements = sectionNode.getElement().elements();
         for (Element e :
                 elements) {
@@ -264,7 +317,7 @@ public class XMLer {
 
     public static void Foreach(SectionNode sectionNode, String nameSection) {
         String name = sectionNode.getElement().attribute("name").getValue();
-//        System.out.println(sectionNode.toFullString());
+        System.out.println(sectionNode.toFullString());
         List<Element> elements = sectionNode.getElement().elements(nameSection);
         for (Element e :
                 elements) {

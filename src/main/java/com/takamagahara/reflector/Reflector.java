@@ -1,7 +1,6 @@
 package com.takamagahara.reflector;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -165,7 +164,7 @@ public class Reflector {
             String parentPath = Paths.get(pathOrigin).getParent().toString();
             String[] pathOriginList = pathOrigin.split("/");
             String nameOrigin = pathOriginList[pathOriginList.length-1];
-            Element target = XMLer.searcher(root, pathOriginList);
+            Element target = XMLer.searchByName(root, pathOriginList);
             if (target != null) {
                 String[] newPathList = backup.get(0).split("/");
                 String newIDName = newPathList[newPathList.length - 1];
@@ -186,7 +185,7 @@ public class Reflector {
     }
 
     /*
-    juge whether the path is in the useful path list or not
+    judge whether the path is in the useful path list or not
      */
     private boolean judgeIn(String path) {
         boolean juge = false;
