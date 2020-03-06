@@ -72,6 +72,8 @@ public class Reflector {
             } else {
                 if (!result.isAbsoluteSame()) {
                     Rename(rootLast, result.getCurrent(), result.getOrigin());
+                } else {
+                    System.out.println("Structure configuration not changed! ");
                 }
             }
         } else {

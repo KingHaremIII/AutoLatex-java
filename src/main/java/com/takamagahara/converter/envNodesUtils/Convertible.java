@@ -1,4 +1,4 @@
-package com.takamagahara.converger.envNodesUtils;
+package com.takamagahara.converter.envNodesUtils;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,5 +9,7 @@ package com.takamagahara.converger.envNodesUtils;
  * Time: 下午10:13
  */
 public interface Convertible {
+    String getPrefix();
     String getText();
+    String getPostfix();
 }

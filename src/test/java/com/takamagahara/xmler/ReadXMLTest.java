@@ -113,6 +113,15 @@ public class ReadXMLTest {
         Element target = XMLer.searchByName(root, path.split("/"));
         System.out.println(target.attributeValue("name"));
     }
+
+    @Test
+    public void sectionNodeReader() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Element root = document.getRootElement();
+        SectionNode sectionNode = new SectionNode(root, "Documents");
+        Element sub = XMLer.reader(
+                sectionNode, (new Operator()),
+                Operator.class.getMethod("show", SectionNode.class));
+    }
 }
 
 

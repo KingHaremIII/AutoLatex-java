@@ -273,32 +273,32 @@ public class XMLer {
      * @throws InvocationTargetException
      */
     public static isSimilarCollection similar(String currentConfig, String originConfig) throws NoSuchMethodException, DocumentException, IllegalAccessException, InvocationTargetException {
-        List<String> currentPathes = new ArrayList<>();
-        List<String> originPathes = new ArrayList<>();
+        List<String> currentPaths = new ArrayList<>();
+        List<String> originPaths = new ArrayList<>();
         XMLer.reader(currentConfig, "section", (new Operator()),
                 Operator.class.getMethod("pathRecorder", SectionNode.class, List.class),
-                currentPathes);
+                currentPaths);
         XMLer.reader(originConfig, "section", (new Operator()),
                 Operator.class.getMethod("pathRecorder", SectionNode.class, List.class),
-                originPathes);
+                originPaths);
 
         int count = 0;
-        for (String sc : currentPathes) {
-            for (String so: originPathes) {
+        for (String sc : currentPaths) {
+            for (String so: originPaths) {
                 if (sc.equals(so)) {
                     count++;
                 }
             }
         }
         isSimilarCollection returnCollection = new isSimilarCollection();
-        returnCollection.setCurrent(currentPathes);
-        returnCollection.setOrigin(originPathes);
+        returnCollection.setCurrent(currentPaths);
+        returnCollection.setOrigin(originPaths);
 
-        if (count < currentPathes.size()-1) {
+        if (count < currentPaths.size()-1) {
             returnCollection.setResult(false);
         } else {
             returnCollection.setResult(true);
-            if (count == currentPathes.size()) {
+            if (count == currentPaths.size()) {
                 returnCollection.setAbsoluteSame(true);
             }
         }

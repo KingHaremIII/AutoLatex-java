@@ -1,6 +1,7 @@
 package com.takamagahara.converter;
 
 import com.takamagahara.xmler.XMLer;
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -51,5 +52,13 @@ public class ConverterTest {
             System.out.println(e.getName());
         }
         System.out.println(((Element) root.elements().get(2)).getName());
+    }
+
+    @Test
+    public void stringEmpty() {
+        String a = document.getRootElement().attributeValue("a");
+        if (a == null) {
+            System.out.println("empty");
+        }
     }
 }
