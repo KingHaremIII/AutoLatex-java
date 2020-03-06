@@ -13,16 +13,6 @@ import java.util.List;
  * Time: 上午8:12
  */
 public abstract class EnvNode implements Convertible {
-    private EnvNode successor;
-
-    public List<Element> getChilds() {
-        return null;
-    }
-
-    public EnvNode next() {
-        return successor;
-    }
-
     @Override
     public String toString() {
         return getPrefix()+getText()+getPostfix();

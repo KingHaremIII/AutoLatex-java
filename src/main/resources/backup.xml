@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<documents documentcalss="IEEEtran" options="journal, twoside, 10pt">
+    <usepackages>
+        <usepackage name="cite"/>
+        <usepackage name="amsmath"/>
+        <usepackage name="amsfonts"/>
+        <usepackage name="caption"/>
+        <usepackage name="graphicx, subfig"/>
+        <usepackage name="algorithm"/>
+        <usepackage name="algorithmic"/>
+        <usepackage name="footnote"/>
+    </usepackages>
+
+    <document>
+        <keywords name="IEEEkeywords">mmWave</keywords>
+
+    </document>
+
+</documents>

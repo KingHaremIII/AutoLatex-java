@@ -3,6 +3,8 @@ package com.takamagahara.converter.envNodes.document;
 import com.takamagahara.converter.envNodes.EnvNode;
 import com.takamagahara.converter.envNodesUtils.Containable;
 import com.takamagahara.converter.envNodesUtils.Convertible;
+import org.dom4j.Element;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,18 +14,22 @@ import com.takamagahara.converter.envNodesUtils.Convertible;
  * Time: 上午10:20
  */
 public class Document extends EnvNode implements Convertible, Containable {
+    public Document(Element documentElement) {
+        return;
+    }
+
     @Override
     public String getPrefix() {
-        return null;
+        return "\\begin{document}\n%!Text\n";
     }
 
     @Override
     public String getText() {
-        return null;
+        return "";
     }
 
     @Override
     public String getPostfix() {
-        return null;
+        return "\\end(document}\n";
     }
 }

@@ -1,12 +1,18 @@
 package com.takamagahara.converter;
 
+import com.takamagahara.converter.envNodesUtils.NodesChainManager;
+import com.takamagahara.inier.iniReader;
+import com.takamagahara.xmler.SAXReaderStore;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,24 +22,42 @@ import java.util.List;
  * Time: 上午10:08
  */
 public class Converter {
-    private List<Element> elementList;
+    String tex;
     private Element root;
+    private String pathProject;
+    private String nameProject;
+    private Map<String, Map<String, String>> config;
 
-    public Converter(String path) {
-        SAXReader reader = new SAXReader();
+    public Converter(String pathProject) {
+        this.pathProject = pathProject;
+        String[] tmp = pathProject.split("/");
+        nameProject = tmp[tmp.length-1];
+        SAXReader reader = SAXReaderStore.getInstance();
         Document document = null;
         try {
-            document = reader.read(new File(path));
+            document = reader.read(new File(pathProject+"/Target/"+nameProject+".xml"));
         } catch (DocumentException e) {
             e.printStackTrace();
         }
         root = document.getRootElement();
-        elementList = root.elements();
     }
 
     public void Convert() {
-        for (Element e : elementList) {
-            
+        NodesChainManager manager = new NodesChainManager(root, pathProject);
+        tex = manager.Process();
+        writeTex();
+    }
+
+    public void writeTex() {
+        FileWriter writer;
+        try {
+            writer = new FileWriter(pathProject+"/Target/"+nameProject+".tex");
+            writer.write("");
+            writer.write(tex);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

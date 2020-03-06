@@ -15,37 +15,32 @@ import java.util.List;
  * Time: 上午9:59
  */
 public class Documents extends EnvNode implements Convertible, Containable {
-    private List<Element> commands;
     private String options;
     private String documentClass;
 
     public Documents(Element documentsNode) {
-        commands = documentsNode.elements();
         options = documentsNode.attributeValue("options");
         documentClass = documentsNode.attributeValue("documentcalss");
     }
 
     @Override
     public String getPrefix() {
+        String returnString;
         if (options == null) {
-            return "\\documentclass{"+documentClass+"}\n";
+            returnString = "\\documentclass{"+documentClass+"}\n";
         } else {
-            return "\\documentclass["+options+"]{"+documentClass+"}\n";
+            returnString = "\\documentclass["+options+"]{"+documentClass+"}\n";
         }
+        return returnString+"% Created from AutoLatex by Ziyao, Kou (email: Kouzuyao@outlook.com)\n";
     }
 
     @Override
     public String getText() {
-        return "% Created from AutoLatex by Ziyao, Kou (email: Kouzuyao@outlook.com)";
+        return "";
     }
 
     @Override
     public String getPostfix() {
         return "\n";
-    }
-
-    @Override
-    public List<Element> getChilds() {
-        return commands;
     }
 }

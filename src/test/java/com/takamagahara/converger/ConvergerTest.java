@@ -31,7 +31,7 @@ public class ConvergerTest {
 
     @Test
     public void reflectTest() throws NoSuchMethodException, DocumentException, IllegalAccessException, InvocationTargetException {
-        Element e = XMLer.reader("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/test.xml",
+        Element e = XMLer.reader("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/backup.xml",
                 (new Operator()), Operator.class.getMethod("addIgnore", Element.class, String.class), "successfully");
         Attribute ig = e.attribute("ignore");
         System.out.println(ig.getValue());

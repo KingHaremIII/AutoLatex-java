@@ -1,6 +1,10 @@
 package com.takamagahara.converter.envNodesUtils;
 
 import com.takamagahara.converter.envNodes.EnvNode;
+import org.dom4j.Element;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,20 +14,31 @@ import com.takamagahara.converter.envNodes.EnvNode;
  * Time: 下午10:33
  */
 public class NodeFactory {
-    public EnvNode build(String className) throws ClassNotFoundException {
+    public static EnvNode build(String className, Element element) {
         EnvNode en = null;
-        Class<?> cls = Class.forName(className);
-        if (EnvNode.class.isAssignableFrom(cls)) {
-            try {
-                en = (EnvNode) cls.newInstance();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
+        try {
+            Class<?> cls = Class.forName(className);
+            if (EnvNode.class.isAssignableFrom(cls)) {
+                try {
+                    Constructor constructor = cls.getConstructor(Element.class);
+                    en = (EnvNode) constructor.newInstance(element);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    System.out.println("NoSuchMethod: "+cls.getName());
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                throw new IncorrectClassForFactory("incorrect class for factory: "+className);
             }
-        } else {
-            throw new IncorrectClassForFactory("incorrect class for factory: "+className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+
         return en;
     }
 }

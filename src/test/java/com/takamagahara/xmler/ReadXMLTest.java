@@ -44,7 +44,7 @@ public class ReadXMLTest {
     public void Test() throws DocumentException {
         Element root = document.getRootElement();
         reader = new SAXReader();
-        document = reader.read(new File("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/test.xml"));
+        document = reader.read(new File("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/backup.xml"));
         Element testRoot = document.getRootElement();
         testRoot.add(root);
         List points = testRoot.elements();
