@@ -1,6 +1,13 @@
 package com.takamagahara.converter;
 
 import com.takamagahara.converter.envNodes.Documents;
+import com.takamagahara.converter.envNodes.document.Body;
+import com.takamagahara.converter.envNodes.document.body.Text;
+import com.takamagahara.converter.envNodesUtils.NodeFactory;
+import com.takamagahara.xmler.Operator;
+import com.takamagahara.xmler.OperatorStore;
+import com.takamagahara.xmler.SectionNode;
+import com.takamagahara.xmler.XMLer;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -9,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,5 +40,15 @@ public class NodeTest {
         Element root = document.getRootElement();
         Documents d = new Documents(root);
         System.out.println(d.getPrefix()+d.getText()+d.getPostfix());
+    }
+
+    @Test
+    public void bodyTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Element root = document.getRootElement().element("document").element("body");
+        Body body = (Body) NodeFactory.build(
+                "com.takamagahara.converter.envNodes.document.Body",
+                root,
+                "/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest");
+        System.out.println(body.getPrefix()+body.getText()+body.getPostfix());
     }
 }

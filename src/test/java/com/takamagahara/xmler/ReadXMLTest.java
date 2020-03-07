@@ -122,6 +122,19 @@ public class ReadXMLTest {
                 sectionNode, (new Operator()),
                 Operator.class.getMethod("show", SectionNode.class));
     }
+
+    @Test
+    public void readPath() throws DocumentException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        document = reader.read(new File("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/Target/IEEEtranTest.xml"));
+        Element textRoot = document.getRootElement().element("document").element("body").element("sections");
+        SectionNode sectionNode = new SectionNode(textRoot, "Documents");
+        List<String> pathText = new ArrayList<>();
+        XMLer.reader(sectionNode, OperatorStore.getInstance(),
+                Operator.class.getMethod("pathRecorderIgnore", SectionNode.class, List.class), pathText);
+        for (String s : pathText) {
+            System.out.println(s);
+        }
+    }
 }
 
 

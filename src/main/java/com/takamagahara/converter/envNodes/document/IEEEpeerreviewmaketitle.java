@@ -7,13 +7,13 @@ import org.dom4j.Element;
  * Created with IntelliJ IDEA.
  * Description:
  * User: kamisama
- * Date: 2020-03-05
- * Time: 上午11:22
+ * Date: 2020-03-07
+ * Time: 上午8:59
  */
-public class Abstract extends SimpleNodePrototype {
-    public Abstract(Element element) {
+public class IEEEpeerreviewmaketitle extends SimpleNodePrototype {
+
+    public IEEEpeerreviewmaketitle(Element element) {
         super(element);
-        prefix = "\\begin{abstract}\n";
-        postfix = "\n\\end{abstract}\n";
+        prefix = "%simpleNode\n\\IEEEpeerreviewmaketitle\n";
     }
 }

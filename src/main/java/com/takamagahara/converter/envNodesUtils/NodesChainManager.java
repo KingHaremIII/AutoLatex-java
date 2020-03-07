@@ -36,7 +36,14 @@ public class NodesChainManager {
         }
         sectionName = root.getName();
         String ClassName = config.get(sectionName).get(sectionName);
-        EnvNode rootNode = NodeFactory.build(ClassName, root);
+        // judge whether the node needs path of the project or not.
+        EnvNode rootNode;
+        if (ClassName.substring(0, 3).equals("[P]")) {
+            ClassName = ClassName.substring(3);
+            rootNode = NodeFactory.build(ClassName, root, pathProject);
+        } else {
+            rootNode = NodeFactory.build(ClassName, root);
+        }
         try {
             Containable dcn = (Containable) rootNode;
         } catch (ClassCastException e) {
@@ -59,7 +66,14 @@ public class NodesChainManager {
         this.config = config;
         sectionName = root.getName();
         String ClassName = config.get(sectionName).get(sectionName);
-        EnvNode rootNode = NodeFactory.build(ClassName, root);
+        // judge whether the node needs path of the project or not.
+        EnvNode rootNode;
+        if (ClassName.substring(0, 3).equals("[P]")) {
+            ClassName = ClassName.substring(3);
+            rootNode = NodeFactory.build(ClassName, root, pathProject);
+        } else {
+            rootNode = NodeFactory.build(ClassName, root);
+        }
         try {
             Containable dcn = (Containable) rootNode;
         } catch (ClassCastException e) {
@@ -79,7 +93,14 @@ public class NodesChainManager {
         String Tex = prefix+"";
 
         for (Element element : ElementList) {
-            EnvNode e = NodeFactory.build(config.get(sectionName).get(element.getName()), element);
+            String ClassName = config.get(sectionName).get(element.getName());
+            EnvNode e;
+            if (ClassName.substring(0, 3).equals("[P]")) {
+                ClassName = ClassName.substring(3);
+                e = NodeFactory.build(ClassName, element, pathProject);
+            } else {
+                e = NodeFactory.build(ClassName, element);
+            }
             try {
                 Containable containable = (Containable) e;
                 NodesChainManager subManager = new NodesChainManager(element, pathProject, config);

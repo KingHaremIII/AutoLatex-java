@@ -1,7 +1,6 @@
 package com.takamagahara.converter;
 
 import com.takamagahara.converter.envNodesUtils.NodesChainManager;
-import com.takamagahara.inier.iniReader;
 import com.takamagahara.xmler.SAXReaderStore;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -11,7 +10,6 @@ import org.dom4j.io.SAXReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 /**

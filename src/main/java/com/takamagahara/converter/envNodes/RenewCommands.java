@@ -9,35 +9,35 @@ import java.util.List;
  * Created with IntelliJ IDEA.
  * Description:
  * User: kamisama
- * Date: 2020-03-04
- * Time: 下午10:30
+ * Date: 2020-03-07
+ * Time: 上午8:26
  */
-public class NewCommands extends EnvNode {
+public class RenewCommands extends EnvNode implements Convertible {
     private List<Element> commands;
-    private final String SinglePrefix = "\\newcommand{";
+    private final String SinglePrefix = "\\renewcommand{";
     private final String SinglePostfix = "\n";
 
-    public NewCommands(Element newCommmandNode) {
-        List<Element> packages = newCommmandNode.elements("newcommand");
+    public RenewCommands(Element newCommmandNode) {
+        List<Element> packages = newCommmandNode.elements("renewcommand");
         if (packages.size() < newCommmandNode.elements().size()) {
-            System.out.println("Warning: <newcommands></newcommands> label has illegal labels. ");
+            System.out.println("Warning: <renewcommands></renewcommands> label has illegal labels. ");
         }
         commands = packages;
     }
 
     @Override
     public String getPrefix() {
-        return "\n%!newcommands\n";
+        return "\n%!renewcommands\n";
     }
 
     @Override
     public String getText() {
-        String newCommandString = "";
+        String renewCommandString = "";
         for (Element e : commands) {
-            newCommandString += SinglePrefix+e.attributeValue("name")+"}"+e.getText()+SinglePostfix;
+            renewCommandString += SinglePrefix+e.attributeValue("name")+"}"+e.getText()+SinglePostfix;
         }
 
-        return newCommandString;
+        return renewCommandString;
     }
 
     @Override

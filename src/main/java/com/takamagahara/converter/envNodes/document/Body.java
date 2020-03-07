@@ -4,12 +4,17 @@ import com.takamagahara.converter.envNodes.EnvNode;
 import com.takamagahara.converter.envNodes.document.body.Text;
 import com.takamagahara.converter.envNodesUtils.Containable;
 import com.takamagahara.converter.envNodesUtils.Convertible;
+import com.takamagahara.converter.envNodesUtils.LabelName2ClassName;
 import com.takamagahara.xmler.Operator;
+import com.takamagahara.xmler.OperatorStore;
 import com.takamagahara.xmler.SectionNode;
 import com.takamagahara.xmler.XMLer;
 import org.dom4j.Element;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,19 +23,29 @@ import java.lang.reflect.InvocationTargetException;
  * Date: 2020-03-05
  * Time: 上午11:27
  */
-public class Body extends EnvNode implements Containable, Convertible {
+public class Body extends EnvNode implements Convertible {
     private Text text;
     private Element sections;
+    private String pathProject;
 
-    public Body(Element body) {
+    public Body(Element body, String pathProject) {
+        this.pathProject = pathProject;
         text = new Text();
         this.sections = body.element("sections");
     }
 
     private void buildText() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        // TODO get key-value after tex in XMLer.reader
-        XMLer.reader((new SectionNode(sections, "Documents")), (new Operator()),
-                Operator.class.getMethod("Tex2String", SectionNode.class, Text.class), text);
+        List<String> pathText = new ArrayList<>();
+        XMLer.reader((new SectionNode(sections, "Documents")), OperatorStore.getInstance(),
+                Operator.class.getMethod("pathRecorderIgnore", SectionNode.class, List.class),
+                pathText);
+        for (String s : pathText) {
+            System.out.println(s);
+        }
+
+        XMLer.reader((new SectionNode(sections, "Documents")), OperatorStore.getInstance(),
+                Operator.class.getMethod("Tex2String", SectionNode.class, Text.class, String.class),
+                text, pathProject);
     }
 
     @Override

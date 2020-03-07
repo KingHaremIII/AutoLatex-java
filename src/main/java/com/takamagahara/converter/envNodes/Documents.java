@@ -25,13 +25,13 @@ public class Documents extends EnvNode implements Convertible, Containable {
 
     @Override
     public String getPrefix() {
-        String returnString;
+        String returnString = "% Created from AutoLatex by Ziyao, Kou (email: Kouzuyao@outlook.com)\n";
         if (options == null) {
-            returnString = "\\documentclass{"+documentClass+"}\n";
+            returnString += "\\documentclass{"+documentClass+"}\n";
         } else {
-            returnString = "\\documentclass["+options+"]{"+documentClass+"}\n";
+            returnString += "\\documentclass["+options+"]{"+documentClass+"}\n";
         }
-        return returnString+"% Created from AutoLatex by Ziyao, Kou (email: Kouzuyao@outlook.com)\n";
+        return returnString;
     }
 
     @Override

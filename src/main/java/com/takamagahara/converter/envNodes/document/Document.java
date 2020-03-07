@@ -20,7 +20,7 @@ public class Document extends EnvNode implements Convertible, Containable {
 
     @Override
     public String getPrefix() {
-        return "\\begin{document}\n%!Text\n";
+        return "%!Text\n\\begin{document}\n";
     }
 
     @Override

@@ -20,8 +20,38 @@ public class NodeFactory {
             Class<?> cls = Class.forName(className);
             if (EnvNode.class.isAssignableFrom(cls)) {
                 try {
-                    Constructor constructor = cls.getConstructor(Element.class);
+                    Constructor constructor;
+                    constructor = cls.getConstructor(Element.class);
                     en = (EnvNode) constructor.newInstance(element);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    System.out.println("NoSuchMethod: "+cls.getName());
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                throw new IncorrectClassForFactory("incorrect class for factory: "+className);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return en;
+    }
+
+    public static EnvNode build(String className, Element element, String pathProject) {
+        EnvNode en = null;
+        try {
+            Class<?> cls = Class.forName(className);
+            if (EnvNode.class.isAssignableFrom(cls)) {
+                try {
+                    Constructor constructor;
+                    constructor = cls.getConstructor(Element.class, String.class);
+                    en = (EnvNode) constructor.newInstance(element, pathProject);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 } catch (InstantiationException e) {

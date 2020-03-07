@@ -25,7 +25,7 @@ public class Keywords extends EnvNode implements Convertible {
 
     @Override
     public String getPrefix() {
-        return "\\begin{"+name+"}\n";
+        return "\n\\begin{"+name+"}\n";
     }
 
     @Override
@@ -35,6 +35,6 @@ public class Keywords extends EnvNode implements Convertible {
 
     @Override
     public String getPostfix() {
-        return "\\end{"+name+"}\n";
+        return "\\end{"+name+"}\n\n";
     }
 }
