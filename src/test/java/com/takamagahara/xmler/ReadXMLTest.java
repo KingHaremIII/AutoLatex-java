@@ -1,5 +1,6 @@
 package com.takamagahara.xmler;
 
+import com.takamagahara.converter.envNodes.document.body.Text;
 import org.dom4j.*;
 import org.dom4j.io.SAXReader;
 import org.junit.Before;
@@ -94,19 +95,6 @@ public class ReadXMLTest {
     }
 
     @Test
-    public void foreachTest() throws DocumentException {
-        SAXReader saxReader = new SAXReader();
-        Document document = saxReader.read(
-                new File("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/Structure.xml"));
-        Element root = document.getRootElement();
-        List<Element> elements = root.elements("section");
-        System.out.println(elements.size());
-
-        SectionNode sectionNode = new SectionNode(root, root.getPath());
-        XMLer.Foreach(sectionNode, "section");
-    }
-
-    @Test
     public void searchTest() {
         Element root = document.getRootElement();
         String path = "III Proposed Method0/2) A";
@@ -134,6 +122,18 @@ public class ReadXMLTest {
         for (String s : pathText) {
             System.out.println(s);
         }
+    }
+
+    @Test
+    public void XMLerTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, DocumentException {
+        document = reader.read(new File("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/Target/IEEEtranTest.xml"));
+        Element textRoot = document.getRootElement().element("document").element("body").element("sections");
+        SectionNode sectionNode = new SectionNode(textRoot, "Documents");
+        Text text = new Text();
+        XMLer.reader(sectionNode, OperatorStore.getInstance(),
+                Operator.class.getMethod("Tex2String", SectionNode.class, Text.class, String.class, String.class),
+                text, "/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest", "body");
+        System.out.println(text.getContent());
     }
 }
 

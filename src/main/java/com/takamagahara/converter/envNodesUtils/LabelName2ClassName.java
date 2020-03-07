@@ -17,7 +17,7 @@ public class LabelName2ClassName {
     private Map<String, Map<String, String>> config;
 
     public LabelName2ClassName(String path) throws IOException {
-        config = iniReader.ReadIniFile(new File(path));
+        config = iniReader.ReadIniFile(new File(path+"/LabelConfig.ini"));
     }
 
     public Map<String, Map<String, String>> getConfig() {

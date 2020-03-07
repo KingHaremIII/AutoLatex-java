@@ -30,7 +30,7 @@ public class NodesChainManager {
     public NodesChainManager(Element root, String pathProject) {
         this.pathProject = pathProject;
         try {
-            config = (new LabelName2ClassName(pathProject + "/LabelConfig.ini")).getConfig();
+            config = (new LabelName2ClassName(pathProject)).getConfig();
         } catch (IOException e) {
             e.printStackTrace();
         }

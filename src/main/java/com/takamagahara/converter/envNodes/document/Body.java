@@ -35,17 +35,9 @@ public class Body extends EnvNode implements Convertible {
     }
 
     private void buildText() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        List<String> pathText = new ArrayList<>();
         XMLer.reader((new SectionNode(sections, "Documents")), OperatorStore.getInstance(),
-                Operator.class.getMethod("pathRecorderIgnore", SectionNode.class, List.class),
-                pathText);
-        for (String s : pathText) {
-            System.out.println(s);
-        }
-
-        XMLer.reader((new SectionNode(sections, "Documents")), OperatorStore.getInstance(),
-                Operator.class.getMethod("Tex2String", SectionNode.class, Text.class, String.class),
-                text, pathProject);
+                Operator.class.getMethod("Tex2String", SectionNode.class, Text.class, String.class, String.class),
+                text, pathProject, "body");
     }
 
     @Override

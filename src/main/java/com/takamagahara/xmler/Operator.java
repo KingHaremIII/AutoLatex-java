@@ -72,9 +72,17 @@ public class Operator {
         }
     }
 
-    public void Tex2String(SectionNode sectionNode, Text text, String pathProject) throws IOException {
-        // TODO figure process.
-        Map<String, String> legalMap = (new LabelName2ClassName(pathProject)).getConfig().get("body");
+    public void Test(SectionNode sectionNode, Text text, String pathProject) {
+        text.add("test\n");
+    }
+
+    public void Tex2String(SectionNode sectionNode, Text text, String pathProject, String configSectionName) {
+        Map<String, String> legalMap = null;
+        try {
+            legalMap = (new LabelName2ClassName(pathProject)).getConfig().get(configSectionName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Set<String> legals = legalMap.keySet();
         String path = sectionNode.getPath();
         String[] splited = path.split("/");

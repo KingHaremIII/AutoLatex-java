@@ -18,5 +18,14 @@ import java.nio.file.Paths;
  * Time: 下午10:51
  */
 public class testRoutine {
+    @Test
+    public void Test() {
+        switch ("ab".substring(0, 1)) {
+            case "a":
+                System.out.println("aa");
+                break;
+            default:
 
+        }
+    }
 }

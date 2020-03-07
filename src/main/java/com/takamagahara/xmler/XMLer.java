@@ -315,7 +315,7 @@ public class XMLer {
         }
     }
 
-    public static void Foreach(SectionNode sectionNode, String nameSection) {
+    private static void Foreach(SectionNode sectionNode, String nameSection) {
         String name = sectionNode.getElement().attribute("name").getValue();
         System.out.println(sectionNode.toFullString());
         List<Element> elements = sectionNode.getElement().elements(nameSection);

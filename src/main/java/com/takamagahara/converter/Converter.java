@@ -24,7 +24,6 @@ public class Converter {
     private Element root;
     private String pathProject;
     private String nameProject;
-    private Map<String, Map<String, String>> config;
 
     public Converter(String pathProject) {
         this.pathProject = pathProject;
