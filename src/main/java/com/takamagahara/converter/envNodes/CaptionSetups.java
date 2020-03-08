@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class CaptionSetups extends EnvNode implements Convertible {
     private List<Element> commands;
-    private final String SinglePrefix = "\\captionsetups";
+    private final String SinglePrefix = "\\captionsetup";
     private final String SinglePostfix = "\n";
 
     public CaptionSetups(Element newCommmandNode) {

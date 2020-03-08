@@ -31,11 +31,21 @@ public class Figure implements Strategy {
             text += "["+options+"]";
         }
         text += "\\centering\n\\includegraphics[width="+element.attributeValue("size");
-        text += ", keepaspectratio]"+"{"+"Target/Resources/"+element.attributeValue("name")+"}\\\\\n";
+        text += ", keepaspectratio]"+"{"+"Resources/"+element.attributeValue("name")+"}\\\\\n";
         text += "\\caption{"+element.getText()+"}\n";
         int length = element.attributeValue("name").length();
         text += "\\label{"+element.attributeValue("name").substring(0, length-4)+"}\n";
-        text += "\\end{figure}\n";
+
+        if (column == null) {
+            text += "\\end{figure}\n";
+        } else {
+            if (column.equals("double")) {
+                text += "\\end{figure*}\n";
+            } else {
+                System.out.println("Warning: column attribute set in element "+element.getPath()+
+                        " with illegal content: "+column);
+            }
+        }
 
         return text;
     }

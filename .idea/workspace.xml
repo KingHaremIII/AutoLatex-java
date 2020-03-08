@@ -10,9 +10,10 @@
       <change afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Target/Resources/system model.pdf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Target/Resources/tab: test.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/CaptionSetups.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/CaptionSetups.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/Body.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/Body.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/Document.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Figure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Figure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Insert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Insert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/reflector/Reflector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/reflector/Reflector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/.StructureBackup.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/.StructureBackup.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Documents/I Introduction/A as/A as.tex" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Documents/I Introduction/A as/A as.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Documents/III Proposed Method0/2) A/2) A.tex" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Documents/III Proposed Method0/2) A/2) A.tex" afterDir="false" />
@@ -20,6 +21,9 @@
       <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Structure.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Structure.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Target/IEEEtranTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Target/IEEEtranTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/abstract.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/AutoLatex.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/META-INF/AutoLatex.kotlin_module" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -305,7 +309,10 @@
       <workItem from="1583626184934" duration="5983000" />
       <workItem from="1583633596005" duration="3000" />
       <workItem from="1583636907591" duration="11000" />
-      <workItem from="1583639891751" duration="1016000" />
+      <workItem from="1583639891751" duration="1197000" />
+      <workItem from="1583665402946" duration="46000" />
+      <workItem from="1583672679997" duration="1325000" />
+      <workItem from="1583675668924" duration="231000" />
     </task>
     <task id="LOCAL-00001" summary="add the reflect mechanism to XMLer.reader. &#10;Converger is not completed, yet.">
       <created>1583151577994</created>
@@ -382,26 +389,26 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="313" y="27" width="1221" height="931" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583218094337" />
-    <state width="1799" height="275" key="GridCell.Tab.0.bottom" timestamp="1583640767866">
+    <state width="1799" height="275" key="GridCell.Tab.0.bottom" timestamp="1583674839859">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="275" key="GridCell.Tab.0.bottom/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583126199455" />
-    <state width="1799" height="275" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583640767866" />
-    <state width="1799" height="275" key="GridCell.Tab.0.center" timestamp="1583640767866">
+    <state width="1799" height="275" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583674839859" />
+    <state width="1799" height="275" key="GridCell.Tab.0.center" timestamp="1583674839859">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="275" key="GridCell.Tab.0.center/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583126199455" />
-    <state width="1799" height="275" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583640767866" />
-    <state width="1799" height="275" key="GridCell.Tab.0.left" timestamp="1583640767866">
+    <state width="1799" height="275" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583674839859" />
+    <state width="1799" height="275" key="GridCell.Tab.0.left" timestamp="1583674839859">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="275" key="GridCell.Tab.0.left/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583126199455" />
-    <state width="1799" height="275" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583640767866" />
-    <state width="1799" height="275" key="GridCell.Tab.0.right" timestamp="1583640767866">
+    <state width="1799" height="275" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583674839859" />
+    <state width="1799" height="275" key="GridCell.Tab.0.right" timestamp="1583674839859">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="275" key="GridCell.Tab.0.right/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583126199455" />
-    <state width="1799" height="275" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583640767866" />
+    <state width="1799" height="275" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583674839859" />
     <state width="1799" height="339" key="GridCell.Tab.1.bottom" timestamp="1583571885354">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -434,11 +441,11 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="588" y="287" width="800" height="531" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1583227232017" />
-    <state x="648" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1583639894969">
+    <state x="648" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1583675669427">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="648" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583121594545" />
-    <state x="648" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583639894969" />
+    <state x="648" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583675669427" />
     <state x="726" y="293" width="524" height="518" key="extract.method.dialog" timestamp="1583453883520">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>

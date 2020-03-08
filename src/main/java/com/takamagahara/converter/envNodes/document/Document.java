@@ -30,6 +30,6 @@ public class Document extends EnvNode implements Convertible, Containable {
 
     @Override
     public String getPostfix() {
-        return "\\end(document}\n";
+        return "\\end{document}\n";
     }
 }

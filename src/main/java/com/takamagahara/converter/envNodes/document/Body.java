@@ -42,7 +42,7 @@ public class Body extends EnvNode implements Convertible {
 
     @Override
     public String getPrefix() {
-        return "\\begin{document}\n";
+        return "\n%!sectionsBEGIN\n";
     }
 
     @Override
@@ -61,6 +61,6 @@ public class Body extends EnvNode implements Convertible {
 
     @Override
     public String getPostfix() {
-        return "\\end{document}\n";
+        return "\n%!sectionsEND\n";
     }
 }
