@@ -31,7 +31,7 @@ public class Figure implements Strategy {
             text += "["+options+"]";
         }
         text += "\\centering\n\\includegraphics[width="+element.attributeValue("size");
-        text += ", keepaspectratio]"+"{"+"Target/Resources/"+element.attributeValue("name")+"}\n\\\\\n";
+        text += ", keepaspectratio]"+"{"+"Target/Resources/"+element.attributeValue("name")+"}\\\\\n";
         text += "\\caption{"+element.getText()+"}\n";
         int length = element.attributeValue("name").length();
         text += "\\label{"+element.attributeValue("name").substring(0, length-4)+"}\n";

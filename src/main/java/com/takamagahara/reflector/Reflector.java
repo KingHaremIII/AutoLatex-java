@@ -39,10 +39,7 @@ public class Reflector {
      * @throws DocumentException
      */
     public void Reflect(String projectPath) throws DocumentException {
-        String[] ignoreList = OperatorStore.getInstance().readToString(projectPath+"/.reflectignore").split("\n");
-        for (String s : ignoreList) {
-            paths.add(projectPath + "/Documents/"+s);
-        }
+        addIgnore(projectPath);
         SAXReader reader = new SAXReader();
         Document document = reader.read(new File(configFile));
         Element root = document.getRootElement();
@@ -61,6 +58,7 @@ public class Reflector {
      * @throws DocumentException
      */
     public void ReflectFast(String projectPath) throws DocumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        addIgnore(projectPath);
         pProject = projectPath;
         SAXReader reader = new SAXReader();
         Document document = reader.read(new File(configFile));
@@ -132,6 +130,7 @@ public class Reflector {
                         if (file2.isDirectory()) {
                             delDir(file2);
                         } else {
+                            System.out.printf("\ndelete: " + file2.getAbsolutePath()+"\n");
                             file2.delete();
                         }
                     }
@@ -271,5 +270,12 @@ public class Reflector {
 
     public List<String> getPaths() {
         return paths;
+    }
+
+    private void addIgnore(String projectPath) {
+        String[] ignoreList = OperatorStore.getInstance().readToString(projectPath+"/.reflectignore").split("\n");
+        for (String s : ignoreList) {
+            paths.add(projectPath + "/Documents/"+s);
+        }
     }
 }

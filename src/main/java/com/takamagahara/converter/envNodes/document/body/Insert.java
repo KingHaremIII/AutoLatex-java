@@ -16,8 +16,8 @@ public class Insert implements Strategy {
     public String Process(Element element, String pathProject) {
         String text = "";
 
-        text += OperatorStore.getInstance().readToString(pathProject+"/Target/resources/"+
-                element.attributeValue("id")+element.attributeValue("name"));
+        text += OperatorStore.getInstance().readToString(pathProject+"/Target/Resources/"+
+                element.attributeValue("id")+" "+element.attributeValue("name")+".tex")+"\n";
 
         return text;
     }
