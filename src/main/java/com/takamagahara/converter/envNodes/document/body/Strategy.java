@@ -10,5 +10,5 @@ import org.dom4j.Element;
  * Time: 下午4:57
  */
 public interface Strategy {
-    String Process(Element element);
+    String Process(Element element, String pathProject);
 }

@@ -2,29 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97e0751b-e5ee-4f51-b4dd-0f2bc6437009" name="Default Changelist" comment="completed converger">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Algorithm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Figure.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Strategier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Strategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Table.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/StrategierStore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/.reflectignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Documents/abstract.tex" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/LabelConfig.ini" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Target/IEEEtranTest.tex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Target/Resources/alg: tmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Target/Resources/system model.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Target/Resources/tab: test" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/Converter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/Body.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/Body.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/Title.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/Title.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodesUtils/LabelName2ClassName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodesUtils/LabelName2ClassName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodesUtils/NodesChainManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodesUtils/NodesChainManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/ConverterEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/ConverterEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/Abstract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/Abstract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Algorithm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Figure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Figure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Strategier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Strategier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Strategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Strategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/converter/envNodes/document/body/Insert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/reflector/Reflector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/reflector/Reflector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/xmler/Operator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/xmler/Operator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takamagahara/xmler/XMLer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takamagahara/xmler/XMLer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/.StructureBackup.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/.StructureBackup.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Documents/I Introduction/B dfd/B dfd.tex" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Documents/I Introduction/B dfd/B dfd.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Documents/I Introduction/A as/A as.tex" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Documents/I Introduction/A as/A as.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Documents/III Proposed Method0/2) A/2) A.tex" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Documents/III Proposed Method0/2) A/2) A.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Env.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Env.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Structure.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Structure.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Target/IEEEtranTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IEEEtranTest/Target/IEEEtranTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backup.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/takamagahara/A.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/takamagahara/BaseTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/takamagahara/InterfaceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/takamagahara/converger/ConvergerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/takamagahara/converger/ConvergerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/takamagahara/converter/ConverterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/takamagahara/converter/ConverterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/takamagahara/reflector/ReflectorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/takamagahara/reflector/ReflectorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/takamagahara/testRoutine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/takamagahara/testRoutine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/takamagahara/xmler/CreateXMLTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/takamagahara/xmler/CreateXMLTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/takamagahara/xmler/ReadXMLTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/takamagahara/xmler/ReadXMLTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takamagahara/reflector/Reflector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takamagahara/reflector/Reflector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/takamagahara/reflector/ReflectorTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/takamagahara/reflector/ReflectorTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,6 +152,22 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.ConverterTest.Test">
+    <configuration name="ConvergerTest.Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AutoLatex" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.takamagahara.converger.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.takamagahara.converger" />
+      <option name="MAIN_CLASS_NAME" value="com.takamagahara.converger.ConvergerTest" />
+      <option name="METHOD_NAME" value="Test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ConverterTest.Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AutoLatex" />
       <extension name="coverage">
@@ -148,22 +179,6 @@
       <option name="PACKAGE_NAME" value="com.takamagahara.converter" />
       <option name="MAIN_CLASS_NAME" value="com.takamagahara.converter.ConverterTest" />
       <option name="METHOD_NAME" value="Test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NodeTest.bodyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AutoLatex" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.takamagahara.converter.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.takamagahara.converter" />
-      <option name="MAIN_CLASS_NAME" value="com.takamagahara.converter.NodeTest" />
-      <option name="METHOD_NAME" value="bodyTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -185,17 +200,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReadXMLTest.readPath" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReflectorTest.Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AutoLatex" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.takamagahara.xmler.*" />
+          <option name="PATTERN" value="com.takamagahara.reflector.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.takamagahara.xmler" />
-      <option name="MAIN_CLASS_NAME" value="com.takamagahara.xmler.ReadXMLTest" />
-      <option name="METHOD_NAME" value="readPath" />
+      <option name="PACKAGE_NAME" value="com.takamagahara.reflector" />
+      <option name="MAIN_CLASS_NAME" value="com.takamagahara.reflector.ReflectorTest" />
+      <option name="METHOD_NAME" value="Test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -219,18 +234,18 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.ConverterTest.Test" />
-      <item itemvalue="JUnit.NodeTest.bodyTest" />
       <item itemvalue="JUnit.testRoutine.Test" />
-      <item itemvalue="JUnit.ReadXMLTest.readPath" />
       <item itemvalue="JUnit.ReadXMLTest.XMLerTest" />
+      <item itemvalue="JUnit.ReflectorTest.Test" />
+      <item itemvalue="JUnit.ConvergerTest.Test" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ConverterTest.Test" />
+        <item itemvalue="JUnit.ConvergerTest.Test" />
+        <item itemvalue="JUnit.ReflectorTest.Test" />
         <item itemvalue="JUnit.testRoutine.Test" />
         <item itemvalue="JUnit.ReadXMLTest.XMLerTest" />
-        <item itemvalue="JUnit.NodeTest.bodyTest" />
-        <item itemvalue="JUnit.ReadXMLTest.readPath" />
       </list>
     </recent_temporary>
   </component>
@@ -303,7 +318,10 @@
       <workItem from="1583470141800" duration="7625000" />
       <workItem from="1583500097290" duration="3172000" />
       <workItem from="1583540532177" duration="9411000" />
-      <workItem from="1583554085286" duration="14897000" />
+      <workItem from="1583554085286" duration="14984000" />
+      <workItem from="1583577336753" duration="1772000" />
+      <workItem from="1583590401448" duration="32000" />
+      <workItem from="1583626184934" duration="5705000" />
     </task>
     <task id="LOCAL-00001" summary="add the reflect mechanism to XMLer.reader. &#10;Converger is not completed, yet.">
       <created>1583151577994</created>
@@ -344,20 +362,20 @@
     </state>
     <state x="635" y="272" width="1087" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583123211518" />
     <state x="635" y="272" width="800" height="677" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583301802047" />
-    <state x="660" y="349" width="656" height="406" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583382978569">
+    <state x="660" y="349" width="625" height="406" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583633039410">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="660" y="349" width="656" height="406" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583123156126" />
-    <state x="660" y="349" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1583382978569" />
+    <state x="660" y="349" width="625" height="406" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1583633039410" />
     <state x="599" y="187" width="779" height="731" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog" timestamp="1583470201982">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="599" y="187" width="779" height="731" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583470201982" />
-    <state x="711" y="255" width="374" height="632" key="#com.intellij.ide.util.MemberChooser" timestamp="1583571796659">
+    <state x="711" y="255" width="374" height="632" key="#com.intellij.ide.util.MemberChooser" timestamp="1583631924359">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="711" y="255" width="554" height="595" key="#com.intellij.ide.util.MemberChooser/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583062787144" />
-    <state x="711" y="255" width="374" height="632" key="#com.intellij.ide.util.MemberChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1583571796659" />
+    <state x="711" y="255" width="374" height="632" key="#com.intellij.ide.util.MemberChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1583631924359" />
     <state x="495" y="473" width="1072" height="158" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1583334004383">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -380,46 +398,46 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="313" y="27" width="1221" height="931" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583218094337" />
-    <state width="1799" height="275" key="GridCell.Tab.0.bottom" timestamp="1583570853957">
+    <state width="1799" height="275" key="GridCell.Tab.0.bottom" timestamp="1583633301327">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="275" key="GridCell.Tab.0.bottom/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583126199455" />
-    <state width="1799" height="275" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583570853957" />
-    <state width="1799" height="275" key="GridCell.Tab.0.center" timestamp="1583570853955">
+    <state width="1799" height="275" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583633301327" />
+    <state width="1799" height="275" key="GridCell.Tab.0.center" timestamp="1583633301326">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="275" key="GridCell.Tab.0.center/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583126199455" />
-    <state width="1799" height="275" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583570853955" />
-    <state width="1799" height="275" key="GridCell.Tab.0.left" timestamp="1583570853953">
+    <state width="1799" height="275" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583633301326" />
+    <state width="1799" height="275" key="GridCell.Tab.0.left" timestamp="1583633301326">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="275" key="GridCell.Tab.0.left/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583126199455" />
-    <state width="1799" height="275" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583570853953" />
-    <state width="1799" height="275" key="GridCell.Tab.0.right" timestamp="1583570853956">
+    <state width="1799" height="275" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583633301326" />
+    <state width="1799" height="275" key="GridCell.Tab.0.right" timestamp="1583633301327">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="275" key="GridCell.Tab.0.right/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583126199455" />
-    <state width="1799" height="275" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583570853956" />
-    <state width="1799" height="339" key="GridCell.Tab.1.bottom" timestamp="1583566172459">
+    <state width="1799" height="275" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583633301327" />
+    <state width="1799" height="339" key="GridCell.Tab.1.bottom" timestamp="1583571885354">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="339" key="GridCell.Tab.1.bottom/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583075114326" />
-    <state width="1799" height="339" key="GridCell.Tab.1.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583566172459" />
-    <state width="1799" height="339" key="GridCell.Tab.1.center" timestamp="1583566172459">
+    <state width="1799" height="339" key="GridCell.Tab.1.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583571885354" />
+    <state width="1799" height="339" key="GridCell.Tab.1.center" timestamp="1583571885354">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="339" key="GridCell.Tab.1.center/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583075114326" />
-    <state width="1799" height="339" key="GridCell.Tab.1.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583566172459" />
-    <state width="1799" height="339" key="GridCell.Tab.1.left" timestamp="1583566172458">
+    <state width="1799" height="339" key="GridCell.Tab.1.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583571885354" />
+    <state width="1799" height="339" key="GridCell.Tab.1.left" timestamp="1583571885354">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="339" key="GridCell.Tab.1.left/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583075114326" />
-    <state width="1799" height="339" key="GridCell.Tab.1.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583566172458" />
-    <state width="1799" height="339" key="GridCell.Tab.1.right" timestamp="1583566172459">
+    <state width="1799" height="339" key="GridCell.Tab.1.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583571885354" />
+    <state width="1799" height="339" key="GridCell.Tab.1.right" timestamp="1583571885354">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1799" height="339" key="GridCell.Tab.1.right/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583075114326" />
-    <state width="1799" height="339" key="GridCell.Tab.1.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583566172459" />
+    <state width="1799" height="339" key="GridCell.Tab.1.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583571885354" />
     <state x="526" y="210" width="924" height="684" key="Maven.ArtifactSearchDialog" timestamp="1583418014398">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -432,27 +450,28 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="588" y="287" width="800" height="531" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1583227232017" />
-    <state x="648" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1583554166384">
+    <state x="648" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1583590401831">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="648" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583121594545" />
-    <state x="648" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583554166384" />
+    <state x="648" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583590401831" />
     <state x="726" y="293" width="524" height="518" key="extract.method.dialog" timestamp="1583453883520">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="726" y="293" width="524" height="518" key="extract.method.dialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583453883520" />
-    <state x="270" y="196" width="1436" height="713" key="new project wizard" timestamp="1583404048427">
+    <state x="270" y="196" width="1436" height="713" key="new project wizard" timestamp="1583590431431">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="270" y="196" width="1436" height="713" key="new project wizard/67.27.1853.1053@67.27.1853.1053" timestamp="1583404048427" />
+    <state x="270" y="196" width="1436" height="713" key="new project wizard/67.27.1853.1053@67.27.1853.1053" timestamp="1583590431431" />
     <state x="686" y="171" width="604" height="763" key="refactoring.ChangeSignatureDialog" timestamp="1583053430978">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="686" y="171" width="604" height="763" key="refactoring.ChangeSignatureDialog/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583053430978" />
-    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1583569295791">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state x="1114" y="257" width="1195" height="678" key="search.everywhere.popup" timestamp="1583627635449">
+      <screen x="67" y="27" width="3293" height="1053" />
     </state>
     <state x="656" y="257" width="672" height="678" key="search.everywhere.popup/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1583116707202" />
-    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1583569295791" />
+    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1583577855543" />
+    <state x="1114" y="257" width="1195" height="678" key="search.everywhere.popup/67.27.3293.1053@67.27.3293.1053" timestamp="1583627635449" />
   </component>
 </project>

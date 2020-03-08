@@ -8,4 +8,8 @@ package com.takamagahara.converter;
  * Time: 下午6:50
  */
 public class ConverterEntry {
+    public static void main(String[] args) {
+        Converter converter = new Converter(args[0]);
+        converter.Convert();
+    }
 }

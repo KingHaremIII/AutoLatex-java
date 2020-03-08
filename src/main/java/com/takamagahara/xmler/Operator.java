@@ -1,5 +1,6 @@
 package com.takamagahara.xmler;
 
+import com.takamagahara.converter.envNodes.document.body.StrategierStore;
 import com.takamagahara.converter.envNodes.document.body.Text;
 import com.takamagahara.converter.envNodesUtils.LabelName2ClassName;
 import org.dom4j.Element;
@@ -104,8 +105,17 @@ public class Operator {
                     }
                 }
             } else {
+                // check whether the label is legally registered or not.
                 if (legals.contains(sectionNode.getElement().getName())) {
-                    // TODO strategy selection.
+                    /*
+                    Strategy Model
+                     */
+                    // 1. acquire full strategy name.
+                    String strategyName = legalMap.get(sectionNode.getElement().getName());
+                    // 2. set strategy.
+                    StrategierStore.getInstance().setStrategy(strategyName, pathProject);
+                    // 3. process label and acquire the text.
+                    text.add(StrategierStore.getInstance().Process(sectionNode.getElement()));
                 } else {
                     System.out.println("Warning: unregistered label: " + sectionNode.getPath());
                 }
@@ -113,7 +123,7 @@ public class Operator {
         }
     }
 
-   private String readToString(String fileName) {
+   public String readToString(String fileName) {
        String encoding = "UTF-8";
        File file = new File(fileName);
        Long fileLength = file.length();

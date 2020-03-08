@@ -32,20 +32,4 @@ public class ConverterTest {
                 "/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest");
         converter.Convert();
     }
-
-    @Test
-    public void FactoryTest() throws DocumentException {
-        String[] tmp = pathProject.split("/");
-        String nameProject = tmp[tmp.length-1];
-        SAXReader reader = SAXReaderStore.getInstance();
-        Document document = reader.read(new File(pathProject+"/Target/"+nameProject+".xml"));
-        EnvNode e = NodeFactory.build(
-                "com.takamagahara.converter.envNodes.document.Document",
-                document.getRootElement().element("document"));
-        try {
-            Containable cn = (Containable) e;
-        } catch (ClassCastException ex) {
-            System.out.println("error");
-        }
-    }
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.takamagahara.xmler.OperatorStore;
 import com.takamagahara.xmler.SectionNode;
 import com.takamagahara.xmler.XMLer;
 import com.takamagahara.xmler.isSimilarCollection;
@@ -38,6 +39,10 @@ public class Reflector {
      * @throws DocumentException
      */
     public void Reflect(String projectPath) throws DocumentException {
+        String[] ignoreList = OperatorStore.getInstance().readToString(projectPath+"/.reflectignore").split("\n");
+        for (String s : ignoreList) {
+            paths.add(projectPath + "/Documents/"+s);
+        }
         SAXReader reader = new SAXReader();
         Document document = reader.read(new File(configFile));
         Element root = document.getRootElement();

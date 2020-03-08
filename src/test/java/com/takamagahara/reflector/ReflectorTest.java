@@ -20,11 +20,4 @@ public class ReflectorTest {
         Reflector reflector = new Reflector("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/Structure.xml");
         reflector.ReflectFast("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest");
     }
-
-    @Test
-    public void isTest() throws DocumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        isSimilarCollection re = XMLer.similar("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/Structure.xml",
-                "/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/.StructureBackup.xml");
-        System.out.println(re.isResult()+"");
-    }
 }

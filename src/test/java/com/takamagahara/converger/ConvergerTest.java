@@ -28,12 +28,4 @@ public class ConvergerTest {
         Converger converger = new Converger("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest");
         converger.Converge("Documents/I Introduction/B dfd");
     }
-
-    @Test
-    public void reflectTest() throws NoSuchMethodException, DocumentException, IllegalAccessException, InvocationTargetException {
-        Element e = XMLer.reader("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/backup.xml",
-                (new Operator()), Operator.class.getMethod("addIgnore", Element.class, String.class), "successfully");
-        Attribute ig = e.attribute("ignore");
-        System.out.println(ig.getValue());
-    }
 }
