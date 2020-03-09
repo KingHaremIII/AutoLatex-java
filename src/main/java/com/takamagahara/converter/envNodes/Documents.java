@@ -2,10 +2,7 @@ package com.takamagahara.converter.envNodes;
 
 import com.takamagahara.converter.envNodesUtils.Containable;
 import com.takamagahara.converter.envNodesUtils.Convertible;
-import org.dom4j.Attribute;
 import org.dom4j.Element;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,10 +14,16 @@ import java.util.List;
 public class Documents extends EnvNode implements Convertible, Containable {
     private String options;
     private String documentClass;
+    private String contentForFast;
 
     public Documents(Element documentsNode) {
         options = documentsNode.attributeValue("options");
         documentClass = documentsNode.attributeValue("documentcalss");
+        if (documentsNode.attributeValue("fast") == null) {
+            contentForFast = "";
+        } else {
+            contentForFast = documentsNode.getText();
+        }
     }
 
     @Override
@@ -31,7 +34,7 @@ public class Documents extends EnvNode implements Convertible, Containable {
         } else {
             returnString += "\\documentclass["+options+"]{"+documentClass+"}\n";
         }
-        return returnString;
+        return returnString+contentForFast;
     }
 
     @Override

@@ -294,14 +294,27 @@ public class XMLer {
         returnCollection.setCurrent(currentPaths);
         returnCollection.setOrigin(originPaths);
 
-        if (count < currentPaths.size()-1) {
+        if (count < originPaths.size()-1) {
             returnCollection.setResult(false);
         } else {
             returnCollection.setResult(true);
-            if (count == currentPaths.size()) {
+            if ((originPaths.size() == currentPaths.size()) && (count == originPaths.size())) {
                 returnCollection.setAbsoluteSame(true);
             }
+            if (count == originPaths.size()-1) {
+                if (currentPaths.size() == originPaths.size()-1) {
+                    returnCollection.setDelete(true);
+                }
+                if (currentPaths.size() == originPaths.size()) {
+                    returnCollection.setModify(true);
+                }
+            }
+            if (count == originPaths.size()) {
+                returnCollection.setIncrement(true);
+            }
         }
+//        System.out.println("count = "+count);
+//        System.out.println("origin size = "+originPaths.size());
         return returnCollection;
     }
 

@@ -60,6 +60,7 @@ public class Reflector {
     public void ReflectFast(String projectPath) throws DocumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         addIgnore(projectPath);
         pProject = projectPath;
+        BackupForBackup();
         SAXReader reader = new SAXReader();
         Document document = reader.read(new File(configFile));
         Element root = document.getRootElement();
@@ -74,7 +75,7 @@ public class Reflector {
                 Flash(projectPath + "/Documents");
             } else {
                 if (!result.isAbsoluteSame()) {
-                    Rename(rootLast, result.getCurrent(), result.getOrigin());
+                    Coordinate(rootLast, result.getCurrent(), result.getOrigin(), result);
                 } else {
                     System.out.println("Structure configuration not changed! ");
                 }
@@ -144,8 +145,9 @@ public class Reflector {
     /*
     rename the only one different file.
      */
-    private void Rename(Element root, List<String> current, List<String> origin) {
-        System.out.println("similar structure, just rename. ");
+    private void Coordinate(Element root, List<String> current, List<String> origin,
+                            isSimilarCollection result) {
+        System.out.println("similar structure. ");
         List<String> backup = new ArrayList<>();
         List<String> backupOrigin = new ArrayList<>();
         for (String s : current) {
@@ -154,39 +156,91 @@ public class Reflector {
         for (String s : origin) {
             backupOrigin.add(s);
         }
-        // find the only one changed file.
-        for (String s : current) {
-            for (String so : origin) {
-                if (s.equals(so)) {
-                    backup.remove(s);
-                    backupOrigin.remove(so);
+
+        // incrementing directories.
+        if (result.isIncrement()) {
+            System.out.println("adding sections...");
+            // find files to be created (left in backup list).
+            for (String s : origin) {
+                for (String sc : current) {
+                    if (s.equals(sc)) {
+                        backup.remove(sc);
+                        backupOrigin.remove(s);
+                    }
                 }
             }
+            for (String sCreate : backup) {
+                String[] tmp = sCreate.split("/");
+                String name = tmp[tmp.length-1];
+                try {
+                    Files.createDirectory(Paths.get(pProject+"/"+sCreate));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    Files.createFile(Paths.get(pProject+"/"+sCreate + "/" + name + ".tex"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return;
         }
 
-        // rename the target file.
-        if (backup.size() == 1) {
-            String pathOrigin = backupOrigin.get(0);
-            String parentPath = Paths.get(pathOrigin).getParent().toString();
-            String[] pathOriginList = pathOrigin.split("/");
-            String nameOrigin = pathOriginList[pathOriginList.length-1];
-            Element target = XMLer.searchByName(root, pathOriginList);
-            if (target != null) {
-                String[] newPathList = backup.get(0).split("/");
-                String newIDName = newPathList[newPathList.length - 1];
-                File targetFile = new File(pProject+"/"+pathOrigin);
-                if (targetFile.exists()) {
-                    // rename directory and its tex file.
-                     targetFile.renameTo(new File(pProject+"/"+parentPath+"/"+newIDName));
-                    (new File(pProject+"/"+parentPath+"/"+newIDName+"/"+nameOrigin+".tex")).renameTo(new File(pProject+"/"+parentPath+"/"+newIDName+"/"+newIDName+".tex"));
+        if (result.isModify()) {
+            System.out.println("renaming target...");
+            // find the only one changed file.
+            for (String s : current) {
+                for (String so : origin) {
+                    if (s.equals(so)) {
+                        backup.remove(s);
+                        backupOrigin.remove(so);
+                    }
+                }
+            }
+
+            // rename the target file.
+            if (backup.size() == 1) {
+                String pathOrigin = backupOrigin.get(0);
+                String parentPath = Paths.get(pathOrigin).getParent().toString();
+                String[] pathOriginList = pathOrigin.split("/");
+                String nameOrigin = pathOriginList[pathOriginList.length - 1];
+                Element target = XMLer.searchByName(root, pathOriginList);
+                if (target != null) {
+                    String[] newPathList = backup.get(0).split("/");
+                    String newIDName = newPathList[newPathList.length - 1];
+                    File targetFile = new File(pProject + "/" + pathOrigin);
+                    if (targetFile.exists()) {
+                        // rename directory and its tex file.
+                        targetFile.renameTo(new File(pProject + "/" + parentPath + "/" + newIDName));
+                        (new File(pProject + "/" + parentPath + "/" + newIDName + "/" + nameOrigin + ".tex")).renameTo(new File(pProject + "/" + parentPath + "/" + newIDName + "/" + newIDName + ".tex"));
+                    } else {
+                        System.out.println("Reflector.Rename: ========Not Found the File: " + targetFile);
+                    }
                 } else {
-                    System.out.println("Reflector.Rename: ========Not Found the File: "+targetFile);
+                    System.out.println("Reflector.Rename: =======================Not Found the Target: " + backupOrigin.get(0));
                 }
             } else {
-                System.out.println("Reflector.Rename: =======================Not Found the Target: "+backupOrigin.get(0));
+                System.out.println("Error in Reflector.Rename with length of left paths: " + backup.size());
             }
-        } else {
-            System.out.println("Error in Reflector.Rename with length of left paths: "+backup.size());
+            return;
+        }
+
+        // delete only one file.
+        if (result.isDelete()) {
+            System.out.println("deleting target...");
+            // find the only one changed file.
+            for (String s : current) {
+                for (String so : origin) {
+                    if (s.equals(so)) {
+                        backup.remove(s);
+                        backupOrigin.remove(so);
+                    }
+                }
+            }
+
+            for (String sDelete : backupOrigin) {
+                delDir(new File(pProject+"/"+sDelete));
+            }
         }
     }
 
@@ -201,33 +255,6 @@ public class Reflector {
             }
         }
         return juge;
-    }
-
-    /*
-    delete useless file or directory
-     */
-    private void deleteFile(File file) {
-//        if (file.isDirectory()) {
-//            File[] files = file.listFiles();
-//            for (File f : files) {
-//                deleteFile(f);
-//            }
-//        } else {
-//            String parent = file.getParent();
-//            File fileParent = new File(parent);
-//            File[] files = fileParent.listFiles();
-//            int i = 0;
-//            for (File f : files) {
-//                if (f.isFile()) {
-//                    i++;
-//                }
-//            }
-//            if (i>1) {
-//                file.delete();
-//            } else {
-//                file.renameTo(new File(parent+"/"+fileParent.getName()+".tex"));
-//            }
-//        }
     }
 
     /*
@@ -255,16 +282,29 @@ public class Reflector {
     create the directory and file
      */
     private void CreateDirectory(String path, String name) {
+        String[] tmpList = path.split("/");
+        String tmp = "/";
+        int i=0;
+        for (;i<tmpList.length-2;i++) {
+            tmp += tmpList[i]+"/";
+        }
+        tmp += tmpList[i];
+        if (tmp.equals(pProject)) {
+            return;
+        }
+
         paths.add(path+"/"+name+".tex");
         try {
             Files.createDirectory(Paths.get(path));
         } catch (IOException e) {
 //            System.out.println(path+" failed");
+//            e.printStackTrace();
         }
         try {
             Files.createFile(Paths.get(path+"/"+name+".tex"));
         } catch (IOException e) {
-
+//            System.out.println(path+"/"+name+".tex"+" failed");
+//            e.printStackTrace();
         }
     }
 
@@ -276,6 +316,30 @@ public class Reflector {
         String[] ignoreList = OperatorStore.getInstance().readToString(projectPath+"/.reflectignore").split("\n");
         for (String s : ignoreList) {
             paths.add(projectPath + "/Documents/"+s);
+        }
+    }
+
+    private void BackupForBackup() {
+        File detect = new File(pProject+"/"+".StructureBackup.xml");
+        if (detect.exists()) {
+            try {
+                FileInputStream fis = new FileInputStream(pProject + "/" + ".StructureBackup.xml");
+                FileOutputStream fos = new FileOutputStream(pProject + "/" + "StructureBackup.xml");
+
+                //创建搬运工具
+                byte datas[] = new byte[1024 * 8];
+                //创建长度
+                int len = 0;
+                //循环读取数据
+                while ((len = fis.read(datas)) != -1) {
+                    fos.write(datas, 0, len);
+                }
+                //3.释放资源
+                fis.close();
+                fis.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -14,9 +14,15 @@ public class isSimilarCollection {
     private List<String> origin;
     private List<String> current;
     private boolean absoluteSame;
+    private boolean delete;
+    private boolean modify;
+    private boolean increment;
 
     public isSimilarCollection() {
         absoluteSame = false;
+        delete = false;
+        modify = false;
+        increment = false;
     }
 
     public boolean isResult() {
@@ -49,5 +55,29 @@ public class isSimilarCollection {
 
     public void setAbsoluteSame(boolean absoluteSame) {
         this.absoluteSame = absoluteSame;
+    }
+
+    public boolean isDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean delete) {
+        this.delete = delete;
+    }
+
+    public boolean isModify() {
+        return modify;
+    }
+
+    public void setModify(boolean modify) {
+        this.modify = modify;
+    }
+
+    public boolean isIncrement() {
+        return increment;
+    }
+
+    public void setIncrement(boolean increment) {
+        this.increment = increment;
     }
 }

@@ -94,14 +94,19 @@ public class Operator {
                 for (int i = 0; i < layer; i++) {
                     tmp += "sub";
                 }
-                tmp += "section{" + sectionNode.getElement().attributeValue("name") + "}\n";
+
+                if (sectionNode.getElement().attributeValue("noNumber") == null) {
+                    tmp += "section{" + sectionNode.getElement().attributeValue("name") + "}\n";
+                } else {
+                    tmp += "section*{" + sectionNode.getElement().attributeValue("name") + "}\n";
+                }
                 text.add(tmp);
                 // ignore root label.
                 if (sectionNode.getPath().split("/").length>1) {
                     // ignore other section except the target section in unit test model.
                     if (sectionNode.getElement().attribute("ignore") == null) {
-                        path += "/"+splited[splited.length-1]+".tex";
-                        text.add(readToString(pathProject+"/"+path) + "\n");
+                        path += "/" + splited[splited.length - 1] + ".tex";
+                        text.add(readToString(pathProject + "/" + path) + "\n");
                     }
                 }
             } else {
