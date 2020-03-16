@@ -31,7 +31,7 @@ public class ConvergerEntry {
                 for (String s : args) {
                     list = list + " " + s;
                 }
-                System.out.println("Illegal parameter number: "+list);
+                System.err.println("Illegal parameter number, expected 1 or 2: "+list);
             }
         }
     }

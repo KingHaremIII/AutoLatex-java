@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.takamagahara.xmler.OperatorStore;
-import com.takamagahara.xmler.SectionNode;
-import com.takamagahara.xmler.XMLer;
-import com.takamagahara.xmler.isSimilarCollection;
+import com.takamagahara.xmler.*;
 import org.dom4j.*;
 import org.dom4j.io.SAXReader;
 
@@ -40,7 +37,7 @@ public class Reflector {
      */
     public void Reflect(String projectPath) throws DocumentException {
         addIgnore(projectPath);
-        SAXReader reader = new SAXReader();
+        SAXReader reader = SAXReaderStore.getInstance();
         Document document = reader.read(new File(configFile));
         Element root = document.getRootElement();
 
@@ -61,12 +58,12 @@ public class Reflector {
         addIgnore(projectPath);
         pProject = projectPath;
         BackupForBackup();
-        SAXReader reader = new SAXReader();
+        SAXReader reader = SAXReaderStore.getInstance();
         Document document = reader.read(new File(configFile));
         Element root = document.getRootElement();
         File file = new File(projectPath+"/.StructureBackup.xml");
         if (file.exists()) {
-            Element rootLast = (new SAXReader()).read(file).getRootElement();
+            Element rootLast = SAXReaderStore.getInstance().read(file).getRootElement();
             isSimilarCollection result = XMLer.similar(configFile, projectPath+"/.StructureBackup.xml");
             if (!result.isResult()) {
                 SectionNode sectionNode = new SectionNode(root, projectPath);
@@ -88,6 +85,47 @@ public class Reflector {
         }
         // backup configuration, then reflector can check whether it needs to reconstruct or just rename next time.
         XMLer.writer(document, projectPath+"/.StructureBackup.xml");
+    }
+
+    /**
+     * Only allow to rename or delete one section and increment arbitrary sections.
+     * @param projectPath absolute path of the project
+     * @throws DocumentException
+     */
+    public void ReflectSafe(String projectPath) throws DocumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        addIgnore(projectPath);
+        pProject = projectPath;
+        BackupForBackup();
+        SAXReader reader = SAXReaderStore.getInstance();
+        Document document = reader.read(new File(configFile));
+        Element root = document.getRootElement();
+        File file = new File(projectPath+"/.StructureBackup.xml");
+        if (file.exists()) {
+            Element rootLast = SAXReaderStore.getInstance().read(file).getRootElement();
+            isSimilarCollection result = XMLer.similar(configFile, projectPath+"/.StructureBackup.xml");
+            if (result.isResult()) {
+                if (!result.isAbsoluteSame()) {
+                    Coordinate(rootLast, result.getCurrent(), result.getOrigin(), result);
+                    // backup configuration, then reflector can check whether it needs to reconstruct or just rename next time.
+                    XMLer.writer(document, projectPath+"/.StructureBackup.xml");
+                } else {
+                    System.out.printf("\n\nStructure configuration not changed! \n\n");
+                }
+            }
+            // not similar, reject the reflect command
+            else {
+                System.err.println("Illegal reflection, you can just 1) rename or delete only one section;" +
+                        " 2) increment arbitrary number of sections. ");
+                System.err.println("reflect command not executed! ");
+            }
+        } else {
+            SectionNode sectionNode = new SectionNode(root, projectPath);
+            Recursive(sectionNode);
+            for (String s : paths) System.out.println(s);
+            Flash(projectPath + "/Documents");
+            // backup configuration, then reflector can check whether it needs to reconstruct or just rename next time.
+            XMLer.writer(document, projectPath+"/.StructureBackup.xml");
+        }
     }
 
     /*
@@ -143,7 +181,7 @@ public class Reflector {
     }
 
     /*
-    rename the only one different file.
+    rename or delete one section; increment arbitrary sections.
      */
     private void Coordinate(Element root, List<String> current, List<String> origin,
                             isSimilarCollection result) {

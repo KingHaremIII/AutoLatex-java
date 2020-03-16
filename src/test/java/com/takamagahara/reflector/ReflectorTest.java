@@ -22,7 +22,7 @@ public class ReflectorTest {
     @Test
     public void Test() throws DocumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         Reflector reflector = new Reflector("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest/Structure.xml");
-        reflector.ReflectFast("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest");
+        reflector.ReflectSafe("/home/kamisama/IdeaProjects/AutoLatex/src/main/resources/IEEEtranTest");
     }
 
     @Test

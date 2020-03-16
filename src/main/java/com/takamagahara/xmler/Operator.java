@@ -4,6 +4,7 @@ import com.takamagahara.converter.envNodes.document.body.StrategierStore;
 import com.takamagahara.converter.envNodes.document.body.Text;
 import com.takamagahara.converter.envNodesUtils.LabelName2ClassName;
 import org.dom4j.Element;
+import org.dom4j.Namespace;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -77,6 +78,19 @@ public class Operator {
         text.add("test\n");
     }
 
+    /**
+     * ignore sections without unitTest attribute
+     * @param sectionNode
+     */
+    public void InverseIgnore(SectionNode sectionNode) {
+        Element element = sectionNode.getElement();
+        if (element.attributeValue("unitTest") == null) {
+            element.addAttribute("ignore", "true");
+        } else {
+            element.remove(Namespace.get("unitTest"));
+        }
+    }
+
     public void Tex2String(SectionNode sectionNode, Text text, String pathProject, String configSectionName) {
         Map<String, String> legalMap = null;
         try {
@@ -85,10 +99,14 @@ public class Operator {
             e.printStackTrace();
         }
         Set<String> legals = legalMap.keySet();
+
         String path = sectionNode.getPath();
         String[] splited = path.split("/");
+        // layer is used to identify the number of cascading "sub".
         int layer = splited.length-2;
+        // filter root node <sections></sections>
         if (layer >= 0) {
+            // normal section node
             if (sectionNode.getElement().getName().equals("section")) {
                 String tmp = "\\";
                 for (int i = 0; i < layer; i++) {
@@ -112,23 +130,25 @@ public class Operator {
             } else {
                 // check whether the label is legally registered or not.
                 if (legals.contains(sectionNode.getElement().getName())) {
-                    /*
-                    Strategy Model
-                     */
-                    // 1. acquire full strategy name.
-                    String strategyName = legalMap.get(sectionNode.getElement().getName());
-                    // 2. set strategy.
-                    StrategierStore.getInstance().setStrategy(strategyName, pathProject);
-                    // 3. process label and acquire the text.
-                    text.add(StrategierStore.getInstance().Process(sectionNode.getElement()));
+                    if (sectionNode.getElement().attribute("ignore") == null) {
+                        /*
+                        Strategy Model
+                         */
+                        // 1. acquire full strategy name.
+                        String strategyName = legalMap.get(sectionNode.getElement().getName());
+                        // 2. set strategy.
+                        StrategierStore.getInstance().setStrategy(strategyName, pathProject);
+                        // 3. process label and acquire the text.
+                        text.add(StrategierStore.getInstance().Process(sectionNode.getElement()));
+                    }
                 } else {
-                    System.out.println("Warning: unregistered label: " + sectionNode.getPath());
+                    System.err.println("Warning: unregistered label: " + sectionNode.getPath());
                 }
             }
         }
     }
 
-   public String readToString(String fileName) {
+    public String readToString(String fileName) {
        String encoding = "UTF-8";
        File file = new File(fileName);
        Long fileLength = file.length();

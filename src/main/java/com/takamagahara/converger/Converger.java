@@ -1,8 +1,6 @@
 package com.takamagahara.converger;
 
-import com.takamagahara.xmler.Operator;
-import com.takamagahara.xmler.SectionNode;
-import com.takamagahara.xmler.XMLer;
+import com.takamagahara.xmler.*;
 import org.dom4j.*;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
@@ -22,16 +20,23 @@ import java.util.List;
  * Time: 下午5:07
  */
 public class Converger {
-    SAXReader reader;
     Document document;
     String projectPath;
     String targetPath;
 
+    Element root;
+    Element documentElement;
+    Element bodyElement;
+
     public Converger(String projectPath) throws DocumentException {
         this.projectPath = projectPath;
-        reader = new SAXReader();
+        SAXReader reader = SAXReaderStore.getInstance();
         document = reader.read(new File(projectPath+"/Env.xml"));
         targetPath = projectPath+"/Target";
+
+        root = document.getRootElement();
+        documentElement = root.element("document");
+        bodyElement = documentElement.element("body");
     }
 
     /**
@@ -39,9 +44,6 @@ public class Converger {
      * @throws DocumentException
      */
     public void Converge() throws DocumentException {
-        Element root = document.getRootElement();
-        Element documentElement = root.element("document");
-        Element bodyElement = documentElement.element("body");
         Element structureRoot = (new SAXReader()).read(new File(projectPath+"/Structure.xml")).getRootElement();
         bodyElement.add(structureRoot);
 
@@ -56,10 +58,6 @@ public class Converger {
      * @throws NoSuchMethodException
      */
     public void Converge(String unitPath) throws DocumentException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Element root = document.getRootElement();
-        Element documentElement = root.element("document");
-        Element bodyElement = documentElement.element("body");
-
         /*
         drop all content of other sections except the unitPath.
          */
@@ -78,5 +76,22 @@ public class Converger {
         bodyElement.add(structureRoot);
         String nameProject = Paths.get(projectPath).getFileName().toString();
         XMLer.writer(document, targetPath+"/"+nameProject+".xml");
+    }
+
+    /**
+     * only converge sections not marked "ignore" from StructureTmp.xml
+     * @throws DocumentException
+     */
+    public void ConvergeLunit() throws DocumentException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        if ((new File(projectPath + "/StructureTmp.xml")).exists()) {
+            Element structureRoot = XMLer.reader(projectPath + "/StructureTmp.xml", OperatorStore.getInstance(),
+                    Operator.class.getMethod("InverseIgnore", SectionNode.class));
+
+            bodyElement.add(structureRoot);
+            String nameProject = Paths.get(projectPath).getFileName().toString();
+            XMLer.writer(document, targetPath + "/" + nameProject + ".xml");
+        } else {
+            System.err.println("You must provide a StructureTmp.xml to define which sections you want to test. ");
+        }
     }
 }
